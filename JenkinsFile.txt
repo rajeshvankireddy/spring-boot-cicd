@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // sh 'echo passed'
-        git branch: 'main', url: 'https://github.com/rajeshdevopsprac/spring-boot'
+        git branch: 'main', url: 'https://github.com/rajeshvankireddy/spring-boot-ci-cd'
       }
     }
     stage('Build and Test') {
