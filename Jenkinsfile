@@ -31,7 +31,11 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
+<<<<<<< HEAD:Jenkinsfile
         DOCKER_IMAGE = "rajvrk/springboot-ci-cd:${BUILD_NUMBER}"
+=======
+        DOCKER_IMAGE = "rajvrk/springbootcicd:${BUILD_NUMBER}"
+>>>>>>> origin/main:JenkinsFile.txt
         // DOCKERFILE_LOCATION = "spring-boot-cicd/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
@@ -56,12 +60,21 @@ pipeline {
                     git config user.email "rajeshvankireddy45@gmail.com"
                     git config user.name "rajeshvankireddy"
                     BUILD_NUMBER=${BUILD_NUMBER}
+<<<<<<< HEAD:Jenkinsfile
                     sed -i 's/replaceImageTag/'"$BUILD_NUMBER"'/g' spring-boot-cicd/deployment.yml
                     apt-get update && apt-get install -y wget
                     wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
                     chmod +x /usr/bin/yq
                     yq eval '.spec.template.spec.containers[] |= select(.name == "spring-boot-app").image = "'"$IMAGE_NAME:$BUILD_NUMBER"'"' -i java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
                     git add spring-boot-cicd/deployment.yml
+=======
+                    sed -i 's/replaceImageTag/'"$BUILD_NUMBER"'/g' spring-boot-ci-cd/deployment.yml
+                    apt-get update && apt-get install -y wget
+                    wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
+                    chmod +x /usr/bin/yq
+                    yq eval '.spec.template.spec.containers[] |= select(.name == "spring-boot-app").image = "'"$IMAGE_NAME:$BUILD_NUMBER"'"' -i spring-boot-ci-cd/deployment.yml
+                    git add spring-boot-app-ci-cd/deployment.yml
+>>>>>>> origin/main:JenkinsFile.txt
                     git commit -m "Update deployment image to version $BUILD_NUMBER" || echo "No changes to commit"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
 
