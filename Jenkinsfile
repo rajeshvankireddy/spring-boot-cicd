@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // sh 'echo passed'
-        git branch: 'main', url: 'https://github.com/rajeshvankireddy/spring-boot-cicd'
+        git branch: 'main', url: 'https://github.com/rajeshvankireddy/spring-boot-cicd.git'
       }
     }
     stage('Build and Test') {
@@ -31,13 +31,9 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-<<<<<<< HEAD:Jenkinsfile
-        DOCKER_IMAGE = "rajvrk/springboot-ci-cd:${BUILD_NUMBER}"
-=======
-        DOCKER_IMAGE = "rajvrk/springbootcicd:${BUILD_NUMBER}"
->>>>>>> origin/main:JenkinsFile.txt
-        // DOCKERFILE_LOCATION = "spring-boot-cicd/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
+      	DOCKER_IMAGE = "rajvrk/springboot-cicd:${BUILD_NUMBER}"
+          // DOCKERFILE_LOCATION = "spring-boot-cicd/Dockerfile"
+          REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
         script {
